@@ -6,7 +6,8 @@ import './App.css';
 class App extends React.Component {
 
   state = {
-    ingredients: []
+    ingredients: [],
+    menuShowing: true
   }
 
   // handleTomatoClick = () => {
@@ -58,24 +59,41 @@ class App extends React.Component {
     })
   }
 
+  createLayer = (ingredient, i) => {
+    return (
+    <div className={ingredient} onClick={() => this.removeIngredient(i)} key={i}>
+      {ingredient}
+    </div> 
+
+    )
+  }
+
+  handleToggle = event => {
+    this.setState({
+      menuShowing: !this.state.menuShowing
+    })
+  }
 
   render() {
+    // var menuShowing = this.state.menuShowing
+    // var ingredients = this.state.ingredients
+    const { menuShowing, ingredients } = this.state
+
     return (
       <div className="App">
+        <button onClick={this.handleToggle}>toggle hide/show</button>
+
+        {menuShowing && 
+          <section>
+            <button onClick={() => this.addIngredient("bun")}>add bun</button>
+            <button onClick={() => this.addIngredient("lettuce")}>add lettuce</button>
+            <button onClick={() => this.addIngredient("tomato")}>add tomato</button>
+            <button onClick={() => this.addIngredient("cheese")}>add cheese</button>
+            <button onClick={() => this.addIngredient("meat")}>add meat</button>
+          </section>}
+
         <section>
-          <button onClick={() => this.addIngredient("bun")}>add bun</button>
-          <button onClick={() => this.addIngredient("lettuce")}>add lettuce</button>
-          <button onClick={() => this.addIngredient("tomato")}>add tomato</button>
-          <button onClick={() => this.addIngredient("cheese")}>add cheese</button>
-          <button onClick={() => this.addIngredient("meat")}>add meat</button>
-        </section>
-        <section>
-          {this.state.ingredients.map(
-            (ingredient, i )=> 
-              <div className={ingredient} onClick={() => this.removeIngredient(i)} key={i}>
-                {ingredient}
-              </div> 
-            )}
+          {ingredients.map(this.createLayer)}
         </section>
   
       </div>
