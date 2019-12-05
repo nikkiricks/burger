@@ -1,26 +1,103 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends React.Component {
+
+  state = {
+    ingredients: []
+  }
+
+  handleTomatoClick = () => {
+    // here is the catch, whenver you update state react wants you to make copies
+    // primitives, necessary for performance
+    // immutable update patterns
+    // let newIngredients = this.state.ingredients.slice(0)
+    // newIngredients.push('tomato')
+
+    this.setState({
+      ingredients: [...this.state.ingredients, 'tomato']
+    })
+  }
+
+  handleCheeseClick = () => {
+    this.setState({
+      ingredients: [...this.state.ingredients, 'cheese']
+    })
+  }
+
+  handleLettuceClick = () => {
+    this.setState({
+      ingredients: [...this.state.ingredients, 'lettuce']
+    })
+  }
+
+  handleBunClick = () => {
+    this.setState({
+      ingredients: [...this.state.ingredients, 'bun']
+    })
+  }
+
+  handleMeatClick = () => {
+    this.setState({
+      ingredients: [...this.state.ingredients, 'meat']
+    })
+  }
+
+  removeIngredient = (index) => {
+   console.log(index)
+   this.setState({
+     ingredients: this.state.ingredients.filter((ingredient, i) => index !== i)
+   }) 
+  }
+
+
+  render() {
+    return (
+      <div className="App">
+        <section>
+          <button onClick={this.handleBunClick}>add bun</button>
+          <button onClick={this.handleLettuceClick}>add lettuce</button>
+          <button onClick={this.handleTomatoClick}>add tomato</button>
+          <button onClick={this.handleCheeseClick}>add cheese</button>
+          <button onClick={this.handleMeatClick}>add meat</button>
+        </section>
+        <section>
+          {this.state.ingredients.map(
+            (ingredient, i )=> 
+              <div onClick={() => this.removeIngredient(i)} key={i}>
+                {ingredient}
+              </div> 
+            )}
+        </section>
+  
+      </div>
+    );
+  }
 }
 
 export default App;
+
+
+
+
+
+// var fruits = [
+//   'banana',
+//   'apple',
+//   'kiwi',
+//   'orange'
+// ]
+
+// function App() {
+//   return (
+//     <div className="App">
+//       {fruits.map(fruit => {
+//         return <h3>{fruit}</h3>
+//       })}
+//     </div>
+//   );
+// }
+
+// export default App;
