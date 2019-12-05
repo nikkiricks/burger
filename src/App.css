@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.cheese {
+  background-color: gold;
+}
+
+.tomato {
+  background-color: tomato;
+}
+
+.lettuce {
+  background-color: lightgreen;
+}
+
+.bun {
+  background-color: tan;
+}
+
+.meat {
+  background-color: brown;
+}

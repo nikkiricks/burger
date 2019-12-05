@@ -9,41 +9,41 @@ class App extends React.Component {
     ingredients: []
   }
 
-  handleTomatoClick = () => {
-    // here is the catch, whenver you update state react wants you to make copies
-    // primitives, necessary for performance
-    // immutable update patterns
-    // let newIngredients = this.state.ingredients.slice(0)
-    // newIngredients.push('tomato')
+  // handleTomatoClick = () => {
+  //   // here is the catch, whenver you update state react wants you to make copies
+  //   // primitives, necessary for performance
+  //   // immutable update patterns
+  //   // let newIngredients = this.state.ingredients.slice(0)
+  //   // newIngredients.push('tomato')
 
-    this.setState({
-      ingredients: [...this.state.ingredients, 'tomato']
-    })
-  }
+  //   this.setState({
+  //     ingredients: [...this.state.ingredients, 'tomato']
+  //   })
+  // }
 
-  handleCheeseClick = () => {
-    this.setState({
-      ingredients: [...this.state.ingredients, 'cheese']
-    })
-  }
+  // handleCheeseClick = () => {
+  //   this.setState({
+  //     ingredients: [...this.state.ingredients, 'cheese']
+  //   })
+  // }
 
-  handleLettuceClick = () => {
-    this.setState({
-      ingredients: [...this.state.ingredients, 'lettuce']
-    })
-  }
+  // handleLettuceClick = () => {
+  //   this.setState({
+  //     ingredients: [...this.state.ingredients, 'lettuce']
+  //   })
+  // }
 
-  handleBunClick = () => {
-    this.setState({
-      ingredients: [...this.state.ingredients, 'bun']
-    })
-  }
+  // handleBunClick = () => {
+  //   this.setState({
+  //     ingredients: [...this.state.ingredients, 'bun']
+  //   })
+  // }
 
-  handleMeatClick = () => {
-    this.setState({
-      ingredients: [...this.state.ingredients, 'meat']
-    })
-  }
+  // handleMeatClick = () => {
+  //   this.setState({
+  //     ingredients: [...this.state.ingredients, 'meat']
+  //   })
+  // }
 
   removeIngredient = (index) => {
    console.log(index)
@@ -52,21 +52,27 @@ class App extends React.Component {
    }) 
   }
 
+  addIngredient = (ingredient) => {
+    this.setState({
+      ingredients: [...this.state.ingredients, ingredient]
+    })
+  }
+
 
   render() {
     return (
       <div className="App">
         <section>
-          <button onClick={this.handleBunClick}>add bun</button>
-          <button onClick={this.handleLettuceClick}>add lettuce</button>
-          <button onClick={this.handleTomatoClick}>add tomato</button>
-          <button onClick={this.handleCheeseClick}>add cheese</button>
-          <button onClick={this.handleMeatClick}>add meat</button>
+          <button onClick={() => this.addIngredient("bun")}>add bun</button>
+          <button onClick={() => this.addIngredient("lettuce")}>add lettuce</button>
+          <button onClick={() => this.addIngredient("tomato")}>add tomato</button>
+          <button onClick={() => this.addIngredient("cheese")}>add cheese</button>
+          <button onClick={() => this.addIngredient("meat")}>add meat</button>
         </section>
         <section>
           {this.state.ingredients.map(
             (ingredient, i )=> 
-              <div onClick={() => this.removeIngredient(i)} key={i}>
+              <div className={ingredient} onClick={() => this.removeIngredient(i)} key={i}>
                 {ingredient}
               </div> 
             )}
